@@ -4,10 +4,10 @@ local xml_gen = require("xml-generator")
 local path = require("path")
 
 ---@class Project
----@field name string
+---@field name string?
 ---@field description string
 ---@field repository_link string
----@field image { src: string, alt: string?, width: integer?, height: integer? }
+---@field image { src: string, alt: string?, width: integer?, height: integer? }?
 
 ---@param xml XML.GeneratorTable
 ---@param project Project
@@ -20,6 +20,10 @@ local function render_project(xml, project)
         xml.a {href=project.repository_link, target="_blank", class="repo-url"} "Repository";
     }
 end
+
+---@type _G
+---@diagnostic disable-next-line: lowercase-global
+lua = nil
 
 return function (app)
     app.page_title = "Projects"
@@ -81,7 +85,7 @@ return function (app)
 
                     [".project a.repo-url"] = {
                         ["display"] = "block";
-                        ["text-align"] = "center";
+                        ["text-align"] = "left";
                         --add padding all around
                         ["padding"] = "10px";
                         ["border-radius"] = "5px";

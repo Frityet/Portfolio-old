@@ -2,30 +2,26 @@ local xml_gen = require("xml-generator")
 local default_style = require("pages/default-style")
 local utilities = require("utilities")
 
-local weblit = require("weblit")
+local url = utilities.html.link
 
----@param app any
----@return XML.Node
-return function (app)
-    return xml_gen.generate_node(function (xml)
-        return xml.html {charset="utf8", lang="en"} {
-            xml.head {
-                xml.title "Amrit's Portfolio";
-                default_style;
-                xml.link {href="style.css", rel="stylesheet"}
-            };
 
-            xml.body {
-                xml.h1 "Amrit's Portfolio";
+return xml_gen.declare_generator(function (app)
+---@diagnostic disable: undefined-global
+    return html {charset="utf8", lang="en"} {
+        head {
+            title "My Portfolio";
+            default_style;
+            link {href="style.css", rel="stylesheet"};
+        };
 
-                xml.p {"Check out my ", xml.a {href="/projects"} "Projects", " list!"};
-
-                xml.div {
-                    xml.h2 "Info:";
-                    -- xml_gen.html_table(app);
-                    utilities.html.tree(weblit)
-                }
+        body {
+            h1 "Amrit's Portfolio";
+            p {"Check out my ", url["projects"]("/projects"), " list!"};
+            div {
+                h2 "Info:";
+                utilities.html.tree(app)
             }
         }
-    end)
-end
+    }
+---@diagnostic enable: undefined-global
+end)

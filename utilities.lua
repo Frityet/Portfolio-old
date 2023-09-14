@@ -13,6 +13,7 @@ end
 
 ---@class utilities
 local export = {
+
     html = {}
 }
 
@@ -81,5 +82,20 @@ function export.html.tree(tbl)
         }
     end)
 end
+
+---Usage:
+---```lua
+---link["caption"]\("url")
+---```
+---@type { [string] : fun(url: string): XML.Node }
+export.html.link = setmetatable({}, {
+    __index = function (_, caption)
+        return function(url)
+            return xml_gen.generate_node(function (xml)
+                return xml.a {href=url}(caption)
+            end)
+        end
+    end
+})
 
 return export
