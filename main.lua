@@ -17,10 +17,7 @@ local page_cache = {}
 
 for name, page in pairs(pages) do
     if type(page) == "function" then
-        app.route({
-            method = "GET",
-            path = "/"..name,
-        }, function (req, res, go)
+        app.route({ method = "GET", path = "/"..name }, function (req, res, go)
             res.code = 200
             res.headers["Content-Type"] = "text/html"
             res.body = tostring(page { request = req, result = res, app = app })

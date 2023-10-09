@@ -12,7 +12,7 @@ description = {
 }
 dependencies = {
    "lua ~> 5.1",
-   "luaxmlgenerator 0.2.3",
+   "luaxmlgenerator ~> 0.4",
    "luafilesystem",
    "penlight"
 }
