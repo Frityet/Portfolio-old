@@ -11,10 +11,19 @@ description = {
    license = "GPLv3"
 }
 dependencies = {
-   "lua ~> 5.1",
-   "luaxmlgenerator ~> 0.4",
-   "luafilesystem",
-   "penlight"
+   "lua >= 5.1",
+   "luaxmlgenerator >= 1.0.0",
+   "penlight",
+   "luasocket",
+   "luasec",
+}
+test_dependencies = {
+   "pegasus",
+   "tabular"
+}
+test = {
+   type = "command",
+   script = "serve.lua"
 }
 build = {
    type = "builtin",
